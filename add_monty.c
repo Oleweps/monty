@@ -12,9 +12,8 @@
 
 stack_t *add(stack_t **stack, int line)
 {
-	stack_t *top = *stack;
-	int sum = top->n + top->next->n;
-	stack_t *temp = top->next;
+	stack_t *top;
+	int sum;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
@@ -22,12 +21,12 @@ stack_t *add(stack_t **stack, int line)
 		exit(EXIT_FAILURE);
 	}
 
-	top->next->n = sum;
-	top->next = temp->next;if (temp->next)
-	{
-		temp->next->prev = top;
-	}
-	free(temp);
+	top = *stack;
+	*stack = (*stack)->next; /* Move to the next element */
+	sum = top->n + (*stack)->n; /* Declare variable here */
+	(*stack)->n = sum;
 
-	return (top);
+	free(top); /* Free the previous top element */
+
+	return (*stack);
 }
