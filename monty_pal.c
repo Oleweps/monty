@@ -11,9 +11,11 @@
 
 void pall(stack_t *stack)
 {
-	while (stack != NULL)
+	stack_t *current = stack;
+
+	while (current != NULL)
 	{
-		fprintf(stdout, "%d\n", stack->n);
-		stack = stack->next;
+		fprintf(stdout, "%d\n", current->n);
+		current = current->next;
 	}
 }
