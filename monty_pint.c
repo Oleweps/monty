@@ -17,11 +17,6 @@ void pint(stack_t *stack)
 		line_or_integer_err(": can't pint, stack empty", 1);
 		exit(EXIT_FAILURE);
 	}
-
-	while (stack != NULL)
-	{
-		fprintf(stdout, "%d\n", stack->n);
-		stack = stack->next;
-		break;
-	}
+	
+	fprintf(stdout, "%d\n", stack->n);
 }
