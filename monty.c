@@ -15,27 +15,27 @@
 
 int main(int argc, char *argv[])
 {
-	char *data, **sep;
-	stack_t *stack, *new;
-	int exit_code = 0;
+	stack_t *stack;
+	char *data;
+	char **sep;
+	stack_t *new;
 
 	if (argc != 2)
 	{
 		print_error("USAGE: monty file", NULL);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 
+	/* Variable declarations */
 	stack = NULL;
 	data = get_file_data(argv[1]);
 	sep = separate_string(data, "\n");
-
 	new = execute_codes(&stack, sep);
-	if (new == NULL)
-		exit_code = 1;
 
+	/* Clean up */
 	free_list(sep);
 	free(data);
 	free_stack(new);
-	stack = NULL;
-	return (exit_code);
+	/* Return exit status based on stack */
+	return ((stack == NULL) ? EXIT_SUCCESS : EXIT_FAILURE);
 }
