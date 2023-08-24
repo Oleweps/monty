@@ -14,30 +14,25 @@
 stack_t *pop(stack_t **stack, int line)
 {
 	stack_t *tmp;
-
 	if (*stack == NULL)
 	{
 		line_or_integer_err(": can't pop an empty stack", line);
 		exit(EXIT_FAILURE);
 	}
 
-	tmp = malloc(sizeof(stack_t));
-	if (tmp == NULL)
-		return (NULL);
+	tmp = *stack;
 
-	if ((*stack)->next == NULL)
-	{
-		free(*stack);
-		return (NULL);
-	}
 	if ((*stack)->next != NULL)
 	{
-		tmp = (*stack);
 		(*stack) = (*stack)->next;
 		(*stack)->prev = NULL;
-		free(tmp);
-		return (*stack);
 	}
+	else
+	{
+		(*stack) = NULL;
+	}
+
+	free(tmp);
 
 	return (*stack);
 }
