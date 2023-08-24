@@ -12,31 +12,22 @@
 
 stack_t *push(stack_t *stack, char *data)
 {
-	stack_t *new;
+	stack_t *new = malloc(sizeof(stack_t));
 
-	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		print_error("Error: malloc failed", NULL);
 		exit(EXIT_FAILURE);
 	}
 
-	if (stack == NULL)
-	{
-		new->prev = NULL;
-		new->n = atoi(data);
-		new->next = NULL;
-		stack = new;
-
-		return (stack);
-	}
-	/** check if the list is empty */
 	new->prev = NULL;
 	new->n = atoi(data);
-	new->next = NULL;
 	new->next = stack;
-	stack->prev = new;
-	stack = new;
 
-	return (stack);
+	if (stack != NULL)
+	{
+		stack->prev = new;
+	}
+
+	return (new);
 }
