@@ -11,10 +11,9 @@
 
 void swap(stack_t *stack, int line)
 {
-	int len, val;
+	int val;
 
-	len = stack_length(stack); /** get length of stack */
-	if (len < 2)
+	if (stack == NULL || stack->next == NULL)
 	{
 		line_or_integer_err(": can't swap, stack too short", line);
 		exit(EXIT_FAILURE);
